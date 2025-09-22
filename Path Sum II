@@ -1,0 +1,38 @@
+
+class Solution(object):
+    def pathSum(self, root, targetSum):
+        """
+        :type root: Optional[TreeNode]
+        :type targetSum: int
+        :rtype: List[List[int]]
+        """
+        c = 0 
+        dum = root
+        t = targetSum
+        b = ""
+        d = []
+        a = []
+        v = []
+        def p(c,dum,t,d,b):
+            if dum:
+                b += str(dum.val)+";"
+                c += dum.val
+                if not(dum.left) and not(dum.right) and c == t:
+                    d.append(b)
+                d = p(c,dum.left,t,d,b)
+                d = p(c,dum.right,t,d,b)
+            return d
+        o = p(c,dum,t,d,b)
+
+        for i in range(len(o)):
+            o[i] = o[i].split(";")
+        
+        for i in range(len(o)):
+            for j in range(len(o[i])-1):
+                v.append(int(o[i][j]))
+            a.append(v)
+            v = []
+        return a
+
+        
+
