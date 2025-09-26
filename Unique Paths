@@ -1,0 +1,14 @@
+class Solution(object):
+    def uniquePaths(self, m, n):
+        i,j=0,0
+        recseries={(m-1,n-1):1}
+        def rec(i,j):
+            if (i>=m or j>=n):
+                return 0
+            if (i,j) in recseries:
+                return recseries[(i,j)]
+            else:
+                recseries[(i,j)]=rec(i+1,j)+rec(i,j+1)
+                return recseries[(i,j)]
+        return rec(i,j)
+        
